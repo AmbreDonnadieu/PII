@@ -17,12 +17,12 @@ namespace ProjetWin
             delivrePar = null;
             soinsConcernes = null;
         }
-        public Feuille_de_Soins(string id, DateTime dateDuDocument, string delivrePar, string soinsConcernes) : base(id, dateDuDocument)
+        public Feuille_de_Soins(string id, DateTime dateDuDocument, string delivrePar, string soinsConcernes, string path) : base(id, dateDuDocument, path)
         {
             this.delivrePar = delivrePar;
             this.soinsConcernes = soinsConcernes;
         }
-        public Feuille_de_Soins(string id, DateTime dateDuDocument, string delivrePar) : base(id, dateDuDocument)
+        public Feuille_de_Soins(string id, DateTime dateDuDocument, string delivrePar, string path) : base(id, dateDuDocument, path)
         {
             this.delivrePar = delivrePar;
             soinsConcernes = null;

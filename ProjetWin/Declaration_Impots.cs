@@ -10,6 +10,6 @@ namespace ProjetWin
     {
         //constructor
         public Declaration_Impots() : base() { }
-        public Declaration_Impots(string id, DateTime dateDuDocument) : base(id, dateDuDocument) { }
+        public Declaration_Impots(string id, DateTime dateDuDocument, string path) : base(id, dateDuDocument, path) { }
     }
 }
