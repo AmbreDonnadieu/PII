@@ -287,7 +287,10 @@ namespace ProjetWin
                 Your_folder.FontSize = 16;
                 Your_folder.Content = dialog.SelectedPath;
             }
-            if(Your_folder)
+            //Your_folder est le dossier sélectionné par l'utilisateur 
+            // en gros faut voir dans les lexiques si le nom du dossier est dedans 
+            // si non il faut demander de créer un nouveau dossier 
+            // si oui on donne les fichiers manquants pour compléter le dossier
             
         }
 

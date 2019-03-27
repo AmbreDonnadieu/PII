@@ -88,7 +88,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Visual" Height="50" Width="196" Margin="0" BorderBrush="#FF466076" FontFamily="Rockwell" Background="#FF31485B" Foreground="#FFE8F5FF" FontSize="24">
+            <TabItem Header="New Folder" Height="50" Width="196" Margin="0" BorderBrush="#FF466076" FontFamily="Rockwell" Background="#FF31485B" Foreground="#FFE8F5FF" FontSize="24">
                 <Grid Margin="-2">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0,1" MappingMode="RelativeToBoundingBox" StartPoint="0,0">
@@ -102,9 +102,14 @@
                             <ImageBrush ImageSource="Resources/Boutoné.png"/>
                         </Button.Background>
                     </Button>
-                    <Label x:Name="Your_folder" Content="path" Margin="22,96,22,408" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Label Content="Name new folder :" Height="35" Margin="98,164,444,349"/>
-                    <TextBox HorizontalAlignment="Left" Height="35" Margin="396,164,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="286"/>
+                    <Label x:Name="Your_folder" Content="path" Margin="22,86,22,418" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Content="Name new folder :" Height="35" Margin="78,143,502,370"/>
+                    <TextBox HorizontalAlignment="Left" Height="35" Margin="306,143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="286"/>
+                    <Button Content="Create" Margin="622,135,62,363" Foreground="#FFE8F5FF" Click="SelectFolder" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="Resources/Boutoné.png"/>
+                        </Button.Background>
+                    </Button>
                     <TextBlock Name="InfoDossier" Margin="106,222,106,30" TextWrapping="Wrap" Text="For this folder, you will need of ... but don't worry, I will collect them for you  " Foreground="#FFE8F5FF" FontSize="22"/>
 
                 </Grid>
