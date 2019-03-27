@@ -41,7 +41,9 @@
                         </Button.Background>
                     </Button>
                     <Grid x:Name="InformationSupp" Visibility="Hidden" >
-                        <Label  x:Name="ResultatIdentification" Content="Label" HorizontalAlignment="Center" Margin="-25,229,89,0" VerticalAlignment="Top" Height="40" MaxWidth="600" Width="724" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label  x:Name="ResultatIdentification" Content="Label" Margin="32,198,32,0" VerticalAlignment="Top" Height="40" MaxWidth="600" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label Content="Date" Margin="231,256,477,243"/>
+                        <DatePicker Margin="412,256,204,243" />
                         <Label x:Name="Propriete1" Content="Label" HorizontalAlignment="Left" Margin="145,310,0,0" VerticalAlignment="Top" Height="46" Width="185"/>
                         <Label x:Name="Propriete2" Content="Label" HorizontalAlignment="Left" Margin="259,360,0,0" VerticalAlignment="Top" Height="46" Visibility="Hidden" />
                         <TextBox x:Name="ResultProp1" HorizontalAlignment="Left" Height="30" Margin="412,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxWidth="400" Width="166"/>
@@ -67,21 +69,21 @@
                             <GradientStop Color="#99CDDCEA" Offset="0.1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
-                    <CheckBox Name="PaieFilter" FontSize="20px" Content="Fiche de paie"  HorizontalAlignment="Left" Margin="208,34,0,0" VerticalAlignment="Top" Checked="PaieOption" Unchecked="PaieOption" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
-                    <CheckBox Name="ImpotFilter" FontSize="20px" Content="Feuille d'impôts" HorizontalAlignment="Left" Margin="208,62,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7" Checked="ImpotOption" Unchecked="ImpotOption"/>
-                    <CheckBox Name="SoinFilter" FontSize="20px" Content="Feuille de soin" HorizontalAlignment="Left" Margin="208,90,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7" Checked="SoinOption" Unchecked="SoinOption"/>
+                    <CheckBox Name="PaieFilter" FontSize="20px" Content="Payslip"  HorizontalAlignment="Left" Margin="208,34,0,0" VerticalAlignment="Top" Checked="PaieOption" Unchecked="PaieOption" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
+                    <CheckBox Name="ImpotFilter" FontSize="20px" Content="Tax Form" HorizontalAlignment="Left" Margin="208,62,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7" Checked="ImpotOption" Unchecked="ImpotOption"/>
+                    <CheckBox Name="SoinFilter" FontSize="20px" Content="Medical Form" HorizontalAlignment="Left" Margin="208,90,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7" Checked="SoinOption" Unchecked="SoinOption"/>
 
-                    <Label Visibility="Collapsed" x:Name="LabelEmployeur" Height="35" FontSize="20px" Content="Employeur"  HorizontalAlignment="Left" Margin="446,34,0,0" VerticalAlignment="Top"  VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
+                    <Label Visibility="Collapsed" x:Name="LabelEmployeur" Height="35" FontSize="20px" Content="Employer"  HorizontalAlignment="Left" Margin="446,34,0,0" VerticalAlignment="Top"  VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
                     <TextBox Visibility="Collapsed" Name="Employeur" Height="35" Margin="605,34,45,253"/>
-                    <Label Visibility="Collapsed" x:Name="LabelAnnee" Height="35" FontSize="20px" Content="Année" HorizontalAlignment="Left" Margin="446,74,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
+                    <Label Visibility="Collapsed" x:Name="LabelAnnee" Height="35" FontSize="20px" Content="Year" HorizontalAlignment="Left" Margin="446,74,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
                     <TextBox Visibility="Collapsed" Name="Année" Height="35" Margin="605,74,45,213"/>
                     <Label Visibility="Collapsed" x:Name="LabelTypSoin" Height="35"  FontSize="20px" Content="Type de Soin" HorizontalAlignment="Left" Margin="446,114,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
                     <TextBox Visibility="Collapsed" Name="TypeSoin" Height="35" Margin="605,114,45,173"/>
                     <Label Visibility="Collapsed" x:Name="LabelDelivreur" Height="35"  FontSize="20px" Content="Délivré par" HorizontalAlignment="Left" Margin="446,154,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
                     <TextBox Visibility="Collapsed" Name="DélivreurSoin" Height="35" Margin="605,154,45,133"/>
 
-                    <TextBox x:Name="NewFilterBox" Margin="123,220,404,71" Background="#CCFFFFFF" />
-                    <Button x:Name="AddNewFilter" Content="Add filter" Margin="490,220,163,71" Click="AddFilter" Foreground="#CCFFFFFF" >
+                    <TextBox Visibility="Collapsed" x:Name="NewFilterBox" Margin="123,220,404,71" Background="#CCFFFFFF" />
+                    <Button Visibility="Collapsed" x:Name="AddNewFilter" Content="Add filter" Margin="490,220,163,71" Click="AddFilter" Foreground="#CCFFFFFF" >
                         <Button.Background>
                             <ImageBrush ImageSource="Resources/Boutoné.png"/>
                         </Button.Background>
@@ -99,8 +101,16 @@
                             <GradientStop Color="#A5CDDCEA" Offset="0.1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
-                    
-                    
+                    <Button Content="Select your folder :" Margin="271,24,271,474" Foreground="#FFE8F5FF" Click="SelectFolder" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="Resources/Boutoné.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Label x:Name="Your_folder" Content="path" Margin="22,96,22,408" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Content="Name new folder :" Height="35" Margin="98,164,444,349"/>
+                    <TextBox HorizontalAlignment="Left" Height="35" Margin="396,164,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="286"/>
+                    <TextBlock Name="InfoDossier" Margin="106,222,106,30" TextWrapping="Wrap" Text="For this folder, you will need of ... but don't worry, I will collect them for you  " Foreground="#FFE8F5FF" FontSize="22"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Paramètre" Height="50" Width="195" BorderBrush="#FF466076" FontFamily="Rockwell" HorizontalAlignment="Left" Margin="0" Background="#FF31485B" Foreground="#FFE8F5FF" FontSize="24">

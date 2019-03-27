@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+
 
 namespace ProjetWin
 {
@@ -165,6 +167,21 @@ namespace ProjetWin
                 DélivreurSoin.Visibility = Visibility.Collapsed;
                 DélivreurSoin.Text = " ";
             }
+        }
+// ---------------------------------------------------------------------------------------------New folder page
+        private void SelectFolder(object sender, RoutedEventArgs e)
+        {
+
+            // before this go to Outils->Gestionnaire de packages NuGet->Console de package NuGet 
+            //and put this "Install-Package Ookii.Dialogs" to install the package
+            var dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+            if (dialog.ShowDialog(this).GetValueOrDefault())
+            {
+                Your_folder.FontSize = 16;
+                Your_folder.Content = dialog.SelectedPath;
+            }
+            
+            
         }
     }
 }
