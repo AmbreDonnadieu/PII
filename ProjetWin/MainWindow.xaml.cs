@@ -62,18 +62,6 @@ namespace ProjetWin
 
         }
 
-        private void PaieOption(object sender, RoutedEventArgs e)
-        {
-            if(PaieFilter.IsChecked == true)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
-
         private void ChooseFileInBrowser(object sender, RoutedEventArgs e) // permet de selectionner un fichier directement depuis l'explorateur de fichier
         {
             OpenFileDialog opentest = new OpenFileDialog();
@@ -129,6 +117,54 @@ namespace ProjetWin
         private void AddFilter(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void PaieOption(object sender, RoutedEventArgs e)
+        {
+            if (PaieFilter.IsChecked == true)
+            {
+                LabelEmployeur.Visibility = Visibility.Visible;
+                Employeur.Visibility = Visibility.Visible;
+            }
+            if (PaieFilter.IsChecked == false)
+            {
+                LabelEmployeur.Visibility = Visibility.Collapsed;
+                Employeur.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ImpotOption(object sender, RoutedEventArgs e)
+        {
+            if(ImpotFilter.IsChecked==true)
+            {
+                LabelAnnee.Visibility = Visibility.Visible;
+                Année.Visibility = Visibility.Visible;
+            }
+            if (ImpotFilter.IsChecked == false)
+            {
+                LabelAnnee.Visibility = Visibility.Collapsed;
+                Année.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void SoinOption(object sender, RoutedEventArgs e)
+        {
+            if (SoinFilter.IsChecked==true)
+            {
+                LabelTypSoin.Visibility = Visibility.Visible;
+                TypeSoin.Visibility = Visibility.Visible;
+                LabelDelivreur.Visibility = Visibility.Visible;
+                DélivreurSoin.Visibility = Visibility.Visible;   
+            }
+            if (SoinFilter.IsChecked == false)
+            {
+                LabelTypSoin.Visibility = Visibility.Collapsed;
+                TypeSoin.Visibility = Visibility.Collapsed;
+                TypeSoin.Text = " ";
+                LabelDelivreur.Visibility = Visibility.Collapsed;
+                DélivreurSoin.Visibility = Visibility.Collapsed;
+                DélivreurSoin.Text = " ";
+            }
         }
     }
 }
