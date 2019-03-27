@@ -180,7 +180,7 @@ namespace ProjetWin
                 Your_folder.FontSize = 16;
                 Your_folder.Content = dialog.SelectedPath;
             }
-            
+            if(Your_folder)
             
         }
     }
