@@ -9,17 +9,20 @@ namespace ProjetWin
     class Document
     {
         protected string id;
-        protected DateTime dateDuDocument;
+        protected string path;
+        protected DateTime dateDuDocument;    
 
         //constructors
         public Document()
         {
             id = null;
-            dateDuDocument = new DateTime(0, 0, 0);
+            path = null;
+            dateDuDocument = new DateTime(2984, 11, 5);
         }
-        public Document(string id, DateTime dateDuDocument)
+        public Document(string id, DateTime dateDuDocument, string path)
         {
             this.id = id;
+            this.path = path;
             this.dateDuDocument = dateDuDocument;
         }
 
@@ -27,10 +30,16 @@ namespace ProjetWin
         public string Id
         {
             get { return id; }
+            set { id = value; }
         }
         public DateTime DateDuDocument
         {
             get { return dateDuDocument; }
+        }
+        public string Path
+        {
+            get { return path; }
+            set { path = value; }
         }
     }
 }

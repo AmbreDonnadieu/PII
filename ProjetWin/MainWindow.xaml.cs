@@ -45,19 +45,31 @@ namespace ProjetWin
             filename.Text = opentest.FileName;
         }
 
-        private void LaunchIdentificationFile(object sender, RoutedEventArgs e) // associé au bouton "upload the selected file", lance la fonction qui va lire le document et qui va lui donne un type
+        private async void LaunchIdentificationFile(object sender, RoutedEventArgs e) // associé au bouton "upload the selected file", lance la fonction qui va lire le document et qui va lui donne un type
         {
-            InformationSupp.Visibility = Visibility.Visible;
             string path = filename.Text;
+            string docname = 
             path = path.Replace("\\", "/");
-            MakeOCRRequest(path).Wait();
-            Document doc = CreateDocument(GetTextfromJSON(File.ReadAllText("JSON.txt")), database);         
+            await Task.Run(() =>
+            {
+                MakeOCRRequest(path).Wait();
+            });
+            Document doc = CreateDocument(GetTextfromJSON(File.ReadAllText("JSON.txt")), database);
+            if (doc == null)
+            {
+                MessageBox.Show("Error, file not recongnized.");
+                return;
+            }
+            else ResultatIdentification.Content = doc.GetType().ToString();
+            doc.Id = GenerateId(NumberForFileType(doc), database);
+            ValiderMetaData.Visibility = Visibility.Visible;
 
             if (doc is Fiche_de_Paie) //avant cette boucle Propriete1 et Propriete2 sont invisible
             {
                 Propriete1.Content = "Employeur";
+                ResultProp1.Visibility = Visibility.Visible;
                 Propriete1.Visibility = Visibility.Visible;
-                (doc as Fiche_de_Paie).Employeur = ResultProp1.Text;
+                File.Move(path, "C:/Users/tfabr/Desktop/Dossier Test PI2/Fiche de Paie" + GetDocName(path));
             }
             else if(doc is Feuille_de_Soins)
             {
@@ -65,21 +77,33 @@ namespace ProjetWin
                 Propriete2.Content = "Soins concernés";
                 Propriete1.Visibility = Visibility.Visible;
                 Propriete2.Visibility = Visibility.Visible;
-                (doc as Feuille_de_Soins).DelivrePar = ResultProp1.Text;
-                (doc as Feuille_de_Soins).SoinsConcernes = ResultProp2.Text;
+                ResultProp1.Visibility = Visibility.Visible;
+                ResultProp2.Visibility = Visibility.Visible;            
+                File.Move(path, "C:/Users/tfabr/Desktop/Dossier Test PI2/Feuille de Soins" + GetDocName(path));
             }
+            else if(doc is Declaration_Impots)
+            {
+                File.Move(path, "C:/Users/tfabr/Desktop/Dossier Test PI2/Déclaration d'Impots" + GetDocName(path));
+            }
+            doc.Path = "C:/Users/tfabr/Desktop/Dossier Test PI2/Déclaration d'Impots" + GetDocName(path);
             database.Add(doc);
         }
 
         private void Validation(object sender, RoutedEventArgs e) // fonction du bouton qui valide la validationdes infos associées au document
         {
-            Propriete1.Content = "Label 1";
-            Propriete2.Content = "Label 2";
-            String metadata1 = ResultProp1.Text;
-            String metadata2 = ResultProp2.Text;
-            ResultProp1.Text = " ";
-            ResultProp2.Text = " ";
-            InformationSupp.Visibility = Visibility.Hidden;
+            if(database[database.Count - 1] is Fiche_de_Paie)(database[database.Count - 1] as Fiche_de_Paie).Employeur = ResultProp1.Text;                      
+            else if(database[database.Count - 1] is Feuille_de_Soins)
+            {
+                (database[database.Count - 1] as Feuille_de_Soins).DelivrePar = ResultProp1.Text;
+                (database[database.Count - 1] as Feuille_de_Soins).SoinsConcernes = ResultProp2.Text;
+            }
+
+            Propriete1.Visibility = Visibility.Hidden;
+            Propriete2.Visibility = Visibility.Hidden;
+            ResultProp1.Visibility = Visibility.Hidden;
+            ResultProp2.Visibility = Visibility.Hidden;
+            ValiderMetaData.Visibility = Visibility.Hidden;
+            ResultatIdentification.Content = "";
         }
 
         private void PaieOption(object sender, RoutedEventArgs e) { }
@@ -214,15 +238,19 @@ namespace ProjetWin
                 JSONupper.Add(S);
             }
             float count = 0;
-            for (int i = 0; i < JSONupper.Count; i++)
+            for (int i = 0; i < upper.Count; i++)
             {
-                for (int j = 0; j < upper.Count; j++)
+                for (int j = 0; j < JSONupper.Count; j++)
                 {
-                    if (JSONupper[i] == upper[j]) count++;
+                    if (upper[i] == JSONupper[j])
+                    {
+                        count++;
+                        break;
+                    }
                 }
             }
             float p = count/upper.Count;
-            if (p >= 0.75) return p;
+            if (p >= 0.33) return p;
             else return 0;
         }
 
@@ -237,8 +265,8 @@ namespace ProjetWin
             }
             else if (Lexique(text, "lexique feuille de soins.txt") > 0)
             {
-                    Feuille_de_Soins doc = new Feuille_de_Soins();
-                    return doc;
+                Feuille_de_Soins doc = new Feuille_de_Soins();
+                return doc;
             }
             else if (Lexique(text, "lexique déclaration impots.txt") > 0)
             {
@@ -293,6 +321,25 @@ namespace ProjetWin
             else id += count;
 
             return id;
+        }
+
+        //Attribue un entier pour chaque type de document
+        static int NumberForFileType(Document doc)
+        {
+            if (doc is Fiche_de_Paie) return 0;
+            else if (doc is Feuille_de_Soins) return 1;
+            else if (doc is Declaration_Impots) return 2;
+            else return -1;
+        }
+
+        //retourne le nom d'un document à partir du chemin d'accès
+        static string GetDocName(string path)
+        {
+            int last = -1;
+            for(int i = 0; i < path.Length; i++) if (path[i] == '/') if (path[i] == '/') last = i;
+            string result = "";
+            for (int i = last; i < path.Length; i++) result += path[i];
+            return result;
         }
 
         public MainWindow()

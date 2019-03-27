@@ -15,7 +15,7 @@ namespace ProjetWin
         {
             employeur = null;
         }
-        public Fiche_de_Paie(string id, DateTime dateDuDocument, string employeur) : base(id, dateDuDocument)
+        public Fiche_de_Paie(string id, DateTime dateDuDocument, string employeur, string path) : base(id, dateDuDocument, path)
         {
             this.employeur = employeur;
         }

@@ -48,7 +48,7 @@
                         <Label x:Name="Propriete2" Content="Label" HorizontalAlignment="Left" Margin="259,360,0,0" VerticalAlignment="Top" Height="46" Visibility="Hidden" />
                         <TextBox x:Name="ResultProp1" HorizontalAlignment="Left" Height="30" Margin="412,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxWidth="400" Width="166"/>
                         <TextBox x:Name="ResultProp2" HorizontalAlignment="Left" Height="30" Margin="359,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxWidth="400" Width="166" Visibility="Hidden"/>
-                        <Button x:Name="ValiderMetaData" Content="Valider" HorizontalAlignment="Center" Margin="332,0,332,64" VerticalAlignment="Bottom" Width="124" Height="30" Click="Validation" Foreground="#FFDDDAFF" BorderBrush="#7FD8D8D8">
+                        <Button x:Name="ValiderMetaData" Content="Valider" HorizontalAlignment="Center" Margin="332,0,332,64" VerticalAlignment="Bottom" Width="124" Height="30" Click="Validation" Foreground="#FFDDDAFF" BorderBrush="#7FD8D8D8" Visibility="Hidden">
                             <Button.Background>
                                 <ImageBrush ImageSource="Resources/Boutoné.png"/>
                             </Button.Background>
