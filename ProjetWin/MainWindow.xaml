@@ -102,7 +102,7 @@
                         </Button.Background>
                     </Button>
                     <Label x:Name="YourFolder" Content="" Margin="22,86,22,418" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Label Content="Name your request :" Height="35" Margin="78,143,502,370"/>
+                    <Label Content="Name your request :" Margin="58,143,502,363"/>
                     <TextBox x:Name="Request" HorizontalAlignment="Left" Height="35" Margin="306,143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="286"/>
                     <Button Content="Create" Margin="622,135,62,363" Foreground="#FFE8F5FF" Click="SelectRequest" >
                         <Button.Background>
