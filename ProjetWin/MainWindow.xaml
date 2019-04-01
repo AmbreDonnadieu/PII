@@ -40,13 +40,13 @@
                             <ImageBrush ImageSource="Resources/Boutoné.png"/>
                         </Button.Background>
                     </Button>
-                    <Grid x:Name="InformationSupp" Visibility="Hidden" >
-                        <Label  x:Name="ResultatIdentification" Content="Label" Margin="32,198,32,0" VerticalAlignment="Top" Height="40" MaxWidth="600" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <Label Content="Date" Margin="231,256,477,243"/>
-                        <DatePicker Margin="412,256,204,243" />
-                        <Label x:Name="Propriete1" Content="Label" HorizontalAlignment="Left" Margin="145,310,0,0" VerticalAlignment="Top" Height="46" Width="185"/>
+                    <Grid x:Name="InformationSupp" Visibility="Visible" >
+                        <Label  x:Name="ResultatIdentification" Content="" Margin="32,198,32,0" VerticalAlignment="Top" Height="40" MaxWidth="600" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label x:Name="TheDate" Content="Date" Margin="231,256,477,243" Visibility="Hidden"/>
+                        <DatePicker x:Name="TheDatePicker" Margin="412,256,204,243" Visibility="Hidden" />
+                        <Label x:Name="Propriete1" Content="Label" HorizontalAlignment="Left" Margin="145,310,0,0" VerticalAlignment="Top" Height="46" Width="185" Visibility="Hidden"/>
                         <Label x:Name="Propriete2" Content="Label" HorizontalAlignment="Left" Margin="259,360,0,0" VerticalAlignment="Top" Height="46" Visibility="Hidden" />
-                        <TextBox x:Name="ResultProp1" HorizontalAlignment="Left" Height="30" Margin="412,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxWidth="400" Width="166"/>
+                        <TextBox x:Name="ResultProp1" HorizontalAlignment="Left" Height="30" Margin="412,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxWidth="400" Width="166" Visibility="Hidden"/>
                         <TextBox x:Name="ResultProp2" HorizontalAlignment="Left" Height="30" Margin="359,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxWidth="400" Width="166" Visibility="Hidden"/>
                         <Button x:Name="ValiderMetaData" Content="Valider" HorizontalAlignment="Center" Margin="332,0,332,64" VerticalAlignment="Bottom" Width="124" Height="30" Click="Validation" Foreground="#FFDDDAFF" BorderBrush="#7FD8D8D8" Visibility="Hidden">
                             <Button.Background>
@@ -70,13 +70,12 @@
                     <CheckBox Name="SoinFilter" FontSize="20px" Content="Medical Form" HorizontalAlignment="Left" Margin="208,90,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7" Checked="SoinOption" Unchecked="SoinOption"/>
 
                     <Label Visibility="Collapsed" x:Name="LabelEmployeur" Height="35" FontSize="20px" Content="Employer"  HorizontalAlignment="Left" Margin="446,34,0,0" VerticalAlignment="Top"  VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
-                    <TextBox Visibility="Collapsed" Name="Employeur" Height="35" Margin="605,34,45,253"/>
+                    <TextBox Visibility="Collapsed" Name="Employeur" Height="35" Margin="605,34,44.8,478.2"/>
                     <Label Visibility="Collapsed" x:Name="LabelAnnee" Height="35" FontSize="20px" Content="Year" HorizontalAlignment="Left" Margin="446,74,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
-                    <TextBox Visibility="Collapsed" Name="Année" Height="35" Margin="605,74,45,213"/>
-                    <Label Visibility="Collapsed" x:Name="LabelTypSoin" Height="35"  FontSize="20px" Content="Medical Treatment" HorizontalAlignment="Left" Margin="446,114,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
-                    <TextBox Visibility="Collapsed" Name="TypeSoin" Height="35" Margin="605,114,45,173"/>
-                    <Label Visibility="Collapsed" x:Name="LabelDelivreur" Height="35"  FontSize="20px" Content="Délivré par" HorizontalAlignment="Left" Margin="446,154,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
-                    <TextBox Visibility="Collapsed" Name="DélivreurSoin" Height="35" Margin="605,154,45,133"/>
+                    <TextBox Visibility="Collapsed" Name="Année" Height="35" Margin="587,78,62.8,434.2"/>
+                    <Label Visibility="Collapsed" x:Name="LabelDelivreur" Height="35"  FontSize="20px" Content="Délivré par" HorizontalAlignment="Left" Margin="451,28,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="#FF272C47" BorderBrush="#FFB48AB7"/>
+                    <TextBox Visibility="Collapsed" Name="DélivreurSoin" Height="35" Margin="587,28,62.8,484.2"/>
+                    <Button Visibility="Hidden" x:Name="Search" Content="Search" Margin="231,139,463.8,364.2" Foreground="#CCFFFFFF" RenderTransformOrigin="2.5,-2.27" Click="SearchingWithFilters"/>
 
                     <TextBox Visibility="Collapsed" x:Name="NewFilterBox" Margin="123,220,404,71" Background="#CCFFFFFF" />
                     <Button Visibility="Collapsed" x:Name="AddNewFilter" Content="Add filter" Margin="490,220,163,71" Click="AddFilter" Foreground="#CCFFFFFF" >
@@ -84,7 +83,7 @@
                             <ImageBrush ImageSource="Resources/Boutoné.png"/>
                         </Button.Background>
                     </Button>
-                    <ListBox Margin="10,226,10,10" Grid.RowSpan="2" Background="#66FFFFFF" BorderBrush="#FF25325A" BorderThickness="2" />
+                    <ListBox x:Name="ListBoxDoc" Margin="10,226,10,10" Grid.RowSpan="2" Background="#66FFFFFF" BorderBrush="#FF25325A" BorderThickness="2" MouseDoubleClick="ListBoxDoc_MouseDoubleClick" />
 
                 </Grid>
             </TabItem>
@@ -102,15 +101,15 @@
                             <ImageBrush ImageSource="Resources/Boutoné.png"/>
                         </Button.Background>
                     </Button>
-                    <Label x:Name="Your_folder" Content="path" Margin="22,86,22,418" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Label Content="Name new folder :" Height="35" Margin="78,143,502,370"/>
-                    <TextBox HorizontalAlignment="Left" Height="35" Margin="306,143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="286"/>
-                    <Button Content="Create" Margin="622,135,62,363" Foreground="#FFE8F5FF" Click="SelectFolder" >
+                    <Label x:Name="YourFolder" Content="" Margin="22,86,22,418" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Content="Name your request :" Height="35" Margin="78,143,502,370"/>
+                    <TextBox x:Name="Request" HorizontalAlignment="Left" Height="35" Margin="306,143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="286"/>
+                    <Button Content="Create" Margin="622,135,62,363" Foreground="#FFE8F5FF" Click="SelectRequest" >
                         <Button.Background>
                             <ImageBrush ImageSource="Resources/Boutoné.png"/>
                         </Button.Background>
                     </Button>
-                    <TextBlock Name="InfoDossier" Margin="106,222,106,30" TextWrapping="Wrap" Text="For this folder, you will need of ... but don't worry, I will collect them for you  " Foreground="#FFE8F5FF" FontSize="22"/>
+                    <TextBlock Name="InfoDossier" Margin="106,222,106,30" TextWrapping="Wrap" Text="For this folder, you will need of ... but don't worry, I will collect them for you  " Foreground="#FFE8F5FF" FontSize="22" Visibility="Hidden"/>
 
                 </Grid>
             </TabItem>
