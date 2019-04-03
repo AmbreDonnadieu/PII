@@ -71,8 +71,8 @@ namespace ProjetWin
                 Propriete1.Content = "Employeur";
                 ResultProp1.Visibility = Visibility.Visible;
                 Propriete1.Visibility = Visibility.Visible;
-                File.Move(path, "C:/Users/tfabr/Desktop/Dossier Test PI2/Fiche de Paie" + GetDocName(path));
-                doc.Path = "C:/Users/tfabr/Desktop/Dossier Test PI2/Fiche de Paie" + GetDocName(path);
+                File.Move(path, "C:/Users/Ambre/Documents/Leonard de Vinci/Annee 4/PI²/CloneProjet/TestPII/Fiche de Paie" + GetDocName(path));
+                doc.Path = "C:/Users/Ambre/Documents/Leonard de Vinci/Annee 4/PI²/CloneProjet/TestPII/Fiche de Paie" + GetDocName(path);
             }
             else if (doc is Feuille_de_Soins)
             {
@@ -82,13 +82,13 @@ namespace ProjetWin
                 Propriete2.Visibility = Visibility.Visible;
                 ResultProp1.Visibility = Visibility.Visible;
                 ResultProp2.Visibility = Visibility.Visible;
-                File.Move(path, "C:/Users/tfabr/Desktop/Dossier Test PI2/Feuille de Soins" + GetDocName(path));
-                doc.Path = "C:/Users/tfabr/Desktop/Dossier Test PI2/Feuille de Soins" + GetDocName(path);
+                File.Move(path, "C:/Users/Ambre/Documents/Leonard de Vinci/Annee 4/PI²/CloneProjet/TestPII/Feuille de Soins" + GetDocName(path));
+                doc.Path = "C:/Users/Ambre/Documents/Leonard de Vinci/Annee 4/PI²/CloneProjet/TestPII/Feuille de Soins" + GetDocName(path);
             }
             else if (doc is Declaration_Impots)
             {
-                File.Move(path, "C:/Users/tfabr/Desktop/Dossier Test PI2/Déclaration d'Impots" + GetDocName(path));
-                doc.Path = "C:/Users/tfabr/Desktop/Dossier Test PI2/Déclaration d'Impots" + GetDocName(path);
+                File.Move(path, "C:/Users/Ambre/Documents/Leonard de Vinci/Annee 4/PI²/CloneProjet/TestPII/Déclaration d'Impots" + GetDocName(path));
+                doc.Path = "C:/Users/Ambre/Documents/Leonard de Vinci/Annee 4/PI²/CloneProjet/TestPII/Déclaration d'Impots" + GetDocName(path);
             }
             database.Add(doc);
         }
@@ -130,47 +130,6 @@ namespace ProjetWin
                 System.Diagnostics.Process.Start(path);
             }
 
-                // Request headers.
-                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
-
-                string requestParameters = "language=unk&detectOrientation=true";
-
-                // Assemble the URI for the REST API method.
-                string uri = uriBase + "?" + requestParameters;
-
-                HttpResponseMessage response;
-
-                // Lecture du contenu et stockage sous forme d'un tableau d'octets
-                byte[] byteData = GetImageAsByteArray(imageFilePath);
-
-                // Add the byte array as an octet stream to the request body.
-                using (ByteArrayContent content = new ByteArrayContent(byteData))
-                {
-                    // This example uses the "application/octet-stream" content type.
-                    // The other content types you can use are "application/json"
-                    // and "multipart/form-data".
-                    content.Headers.ContentType =
-                        new MediaTypeHeaderValue("application/octet-stream");
-
-                    // Asynchronously call the REST API method.
-                    response = await client.PostAsync(uri, content);
-                }
-
-                // Asynchronously get the JSON response.
-                string contentString = await response.Content.ReadAsStringAsync();
-
-                //Ecriture du JSON dans un fichier texte
-                //Qui sera lu par la suite
-                string file = "JSON.txt";
-                StreamWriter sw = new StreamWriter(file);
-                sw.WriteLine(JToken.Parse(contentString).ToString());
-                sw.Close();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("\n" + e.Message);
-            }
         }
 
         private string RecupID(string phrase)
@@ -189,9 +148,7 @@ namespace ProjetWin
 
         private void PaieOption(object sender, RoutedEventArgs e)
         {
-            // Open a read-only file stream for the specified file.
-            using (FileStream fileStream =
-                new FileStream(imageFilePath, FileMode.Open, FileAccess.Read))
+            if (PaieFilter.IsChecked == true)
             {
                 LabelAnnee.Visibility = Visibility.Visible;
                 Année.Visibility = Visibility.Visible;
@@ -251,27 +208,6 @@ namespace ProjetWin
                     }
                 }
             }
-            List<string> JSONupper = new List<string>();
-            foreach (string s in JSON)
-            {
-                string S = s.ToUpper();
-                JSONupper.Add(S);
-            }
-            float count = 0;
-            for (int i = 0; i < upper.Count; i++)
-            {
-                for (int j = 0; j < JSONupper.Count; j++)
-                {
-                    if (upper[i] == JSONupper[j])
-                    {
-                        count++;
-                        break;
-                    }
-                }
-            }
-            float p = count/upper.Count;
-            if (p >= 0.33) return p;
-            else return 0;
         }
         private void SoinOption(object sender, RoutedEventArgs e)
         {
@@ -305,12 +241,6 @@ namespace ProjetWin
                     }
                 }
             }
-            else if (Lexique(text, "lexique déclaration impots.txt") > 0)
-            {
-                Declaration_Impots doc = new Declaration_Impots();
-                return doc;
-            }
-            return null;
         }
 
         private void SearchingWithFilters(object sender, RoutedEventArgs e)
