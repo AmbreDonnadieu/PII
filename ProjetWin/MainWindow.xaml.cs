@@ -60,7 +60,7 @@ namespace ProjetWin
                 MessageBox.Show("Error, file not recongnized.");
                 return;
             }
-            else ResultatIdentification.Content = doc.GetType().ToString();
+            else ResultatIdentification.Content = doc.GetType().ToString().Substring(10);
             doc.Id = GenerateId(NumberForFileType(doc), database);
             ValiderMetaData.Visibility = Visibility.Visible;
             TheDate.Visibility = Visibility.Visible;
@@ -141,6 +141,7 @@ namespace ProjetWin
                 if (phrase[i] == ':')
                 {
                     debut = i + 2;
+                    break;
                 }
             }
             return phrase.Substring(debut, longueur);
@@ -250,34 +251,34 @@ namespace ProjetWin
                 ListBoxDoc.Items.RemoveAt(i);
             }
             //Fiche de Paie
-            if(PaieFilter.IsChecked == true)
+            if (PaieFilter.IsChecked == true)
             {
                 foreach (Document paper in database)
                 {
-                    if(Année.Text == "")
+                    if (Année.Text == "")
                     {
-                        if(Employeur.Text == "")
+                        if (Employeur.Text == "")
                         {
-                            if(paper is Fiche_de_Paie)
+                            if (paper is Fiche_de_Paie)
                             {
                                 ListBoxDoc.Items.Add(paper.GetType().ToString().Substring(10) + " ID : " + paper.Id + " Date : " + paper.DateDuDocument);
                             }
                         }
-                        else if(paper is Fiche_de_Paie) if((paper as Fiche_de_Paie).Employeur == Employeur.Text)
+                        else if (paper is Fiche_de_Paie) if ((paper as Fiche_de_Paie).Employeur == Employeur.Text)
                             {
                                 ListBoxDoc.Items.Add(paper.GetType().ToString().Substring(10) + " ID : " + paper.Id + " Date : " + paper.DateDuDocument);
                             }
                     }
-                    else if(Employeur.Text == "")
+                    else if (Employeur.Text == "")
                     {
-                        if(paper is Fiche_de_Paie && Convert.ToString(paper.DateDuDocument.Year) == Année.Text)
+                        if (paper is Fiche_de_Paie && Convert.ToString(paper.DateDuDocument.Year) == Année.Text)
+                        {
+                            ListBoxDoc.Items.Add(paper.GetType().ToString().Substring(10) + " ID : " + paper.Id + " Date : " + paper.DateDuDocument);
+                        }
+                        else if (paper is Fiche_de_Paie) if ((paper as Fiche_de_Paie).Employeur == Employeur.Text && Convert.ToString(paper.DateDuDocument.Year) == Année.Text)
                             {
                                 ListBoxDoc.Items.Add(paper.GetType().ToString().Substring(10) + " ID : " + paper.Id + " Date : " + paper.DateDuDocument);
                             }
-                        else if(paper is Fiche_de_Paie ) if((paper as Fiche_de_Paie).Employeur == Employeur.Text && Convert.ToString(paper.DateDuDocument.Year) == Année.Text)
-                                {
-                                    ListBoxDoc.Items.Add(paper.GetType().ToString().Substring(10) + " ID : " + paper.Id + " Date : " + paper.DateDuDocument);
-                                }
                     }
                 }
             }
@@ -303,24 +304,24 @@ namespace ProjetWin
                     else if (Employeur.Text == "")
                     {
                         if (paper is Feuille_de_Soins && Convert.ToString(paper.DateDuDocument.Year) == Année.Text)
+                        {
+                            ListBoxDoc.Items.Add(paper.GetType().ToString().Substring(10) + " ID : " + paper.Id + " Date : " + paper.DateDuDocument);
+                        }
+                        else if (paper is Feuille_de_Soins) if ((paper as Feuille_de_Soins).DelivrePar == DélivreurSoin.Text && Convert.ToString(paper.DateDuDocument.Year) == Année.Text)
                             {
                                 ListBoxDoc.Items.Add(paper.GetType().ToString().Substring(10) + " ID : " + paper.Id + " Date : " + paper.DateDuDocument);
                             }
-                            else if (paper is Feuille_de_Soins) if ((paper as Feuille_de_Soins).DelivrePar == DélivreurSoin.Text && Convert.ToString(paper.DateDuDocument.Year) == Année.Text)
-                                {
-                                    ListBoxDoc.Items.Add(paper.GetType().ToString().Substring(10) + " ID : " + paper.Id + " Date : " + paper.DateDuDocument);
-                                }
                     }
                 }
             }
             //Déclaration d'impots
-            if(ImpotFilter.IsChecked == true)
+            if (ImpotFilter.IsChecked == true)
             {
-                foreach(Document paper in database)
+                foreach (Document paper in database)
                 {
                     if (Année.Text == "")
                     {
-                        if(paper is Declaration_Impots)
+                        if (paper is Declaration_Impots)
                         {
                             ListBoxDoc.Items.Add(paper.GetType().ToString().Substring(10) + " ID : " + paper.Id + " Date : " + paper.DateDuDocument);
                         }
@@ -567,17 +568,19 @@ namespace ProjetWin
 
             for (int i = 0; i < database.Count; i++)
             {
+
                 for (int j = 0; j < database[i].Id.Length / 2; j++)
                 {
                     idFileType += database[i].Id[j];
                 }
                 if (idFileType == id) count++;
+                idFileType = "";
             }
 
             if (count == 0) id += "0000";
-            else if (count < 10) id += "000" + count;
-            else if (count < 100) id += "00" + count;
-            else if (count < 1000) id += "0" + count;
+            else if (count < 10) id += "000" + (count + 1);
+            else if (count < 100) id += "00" + (count + 1);
+            else if (count < 1000) id += "0" + (count + 1);
             else id += count;
 
             return id;

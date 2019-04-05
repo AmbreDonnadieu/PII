@@ -89,10 +89,6 @@
             </TabItem>
             <TabItem Header="New Folder" Height="50" Width="196" Margin="0" BorderBrush="#FF466076" FontFamily="Rockwell" Background="#FF31485B" Foreground="#FFE8F5FF" FontSize="24">
                 <Grid Margin="-2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="143*"/>
-                        <ColumnDefinition Width="655*"/>
-                    </Grid.ColumnDefinitions>
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0,1" MappingMode="RelativeToBoundingBox" StartPoint="0,0">
                             <GradientStop Color="#FF273037" Offset="1"/>
@@ -100,20 +96,20 @@
                             <GradientStop Color="#A5CDDCEA" Offset="0.1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
-                    <Button Content="Select your folder :" Margin="128.071,24,271,474" Foreground="#FFE8F5FF" Click="SelectFolder" Grid.Column="1" >
+                    <Button Content="Select your folder :" Margin="271,24,271,474" Foreground="#FFE8F5FF" Click="SelectFolder" >
                         <Button.Background>
                             <ImageBrush ImageSource="Resources/Boutoné.png"/>
                         </Button.Background>
                     </Button>
-                    <Label x:Name="YourFolder" Content="" Margin="22,86,22,418" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
-                    <Label Content="Name your request :" Margin="56,143,502,363" Grid.ColumnSpan="2"/>
-                    <TextBox x:Name="Request" HorizontalAlignment="Left" Height="35" Margin="163.071,143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="286" Grid.Column="1"/>
-                    <Button Content="Create" Margin="479.071,135,62,363" Foreground="#FFE8F5FF" Click="SelectRequest" Grid.Column="1" >
+                    <Label x:Name="YourFolder" Content="" Margin="22,86,22,418" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Content="Name your request :" Height="35" Margin="78,143,502,370"/>
+                    <TextBox x:Name="Request" HorizontalAlignment="Left" Height="35" Margin="306,143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="286"/>
+                    <Button Content="Create" Margin="622,135,62,363" Foreground="#FFE8F5FF" Click="SelectRequest" >
                         <Button.Background>
                             <ImageBrush ImageSource="Resources/Boutoné.png"/>
                         </Button.Background>
                     </Button>
-                    <TextBlock Name="InfoDossier" Margin="106,222,106,30" TextWrapping="Wrap" Text="For this folder, you will need of ... but don't worry, I will collect them for you  " Foreground="#FFE8F5FF" FontSize="22" Visibility="Hidden" Grid.ColumnSpan="2"/>
+                    <TextBlock Name="InfoDossier" Margin="106,222,106,30" TextWrapping="Wrap" Text="For this folder, you will need of ... but don't worry, I will collect them for you  " Foreground="#FFE8F5FF" FontSize="22" Visibility="Hidden"/>
 
                 </Grid>
             </TabItem>
